@@ -12,7 +12,7 @@ AND = {
 
 df = pd.DataFrame(AND)
 
-df
+print(df)
 
 
 X,y = prepare_data(df)

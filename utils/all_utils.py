@@ -43,7 +43,7 @@ def save_plot(df, file_name, model):
        x2_min, x2_max = x2.min() -1 , x2.max() + 1  
 
        xx1, xx2 = np.meshgrid(np.arange(x1_min, x1_max, resolution), 
-                           np.arange(x2_min, x2_max, resolution))
+                              np.arange(x2_min, x2_max, resolution))
        print(xx1)
        print(xx1.ravel())
        Z = classfier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
@@ -53,3 +53,13 @@ def save_plot(df, file_name, model):
        plt.ylim(xx2.min(), xx2.max())
 
        plt.plot()
+
+    X, y = prepare_data(df)
+
+    _create_base_plot(df)
+    _plot_decision_regions(X, y, model)
+
+    plot_dir = "plots"
+    os.makedirs(plot_dir, exist_ok=True) # ONLY CREATE IF MODEL_DIR DOESN"T EXISTS
+    plotPath = os.path.join(plot_dir, file_name) # model/filename
+    plt.savefig(plotPath)   
